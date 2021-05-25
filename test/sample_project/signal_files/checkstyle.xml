@@ -1,0 +1,5 @@
+<!-- Checkstyle configuration -->
+<module name="Checker">
+  <module name="NewlineAtEndOfFile"/>
+  <module name="FileLength"/>
+</module>

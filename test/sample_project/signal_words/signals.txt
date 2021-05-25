@@ -1,0 +1,3 @@
+checkstyle - signal
+findbugs - signal
+foopmdfoo - no signal
