@@ -1,12 +1,13 @@
 NAME = "Checkstyle"
 
 file_regex = {
-    ".*checkstyle.*",                                                           # name
-    "checkstyle.xml",                                                           # https://docs.gradle.org/current/userguide/checkstyle_plugin.html in <root>\config\checkstyle, https://stickler-ci.com/docs#java
-    "google_checks.xml", "sun_checks.xml",                                      # https://github.com/nikitasavinov/checkstyle-action#checkstyle-github-action
-    "checkstyle_config.xml",                                                    # https://github.com/nikitasavinov/checkstyle-action#checkstyle-github-action
-    "maven_checks.xml",                                                         # http://maven.apache.org/plugins/maven-checkstyle-plugin/
-    "linter.yml",                                                               # https://github.com/github/super-linter in <root>/.github/workflows/
+    ".*checkstyle.*",                                                               # name
+    "checkstyle[.]xml",                                                             # https://docs.gradle.org/current/userguide/checkstyle_plugin.html in <root>\config\checkstyle, https://stickler-ci.com/docs#java
+    "google_checks[.]xml", "sun_checks[.]xml",                                      # https://github.com/nikitasavinov/checkstyle-action#checkstyle-github-action
+    "checkstyle_config[.]xml",                                                      # https://github.com/nikitasavinov/checkstyle-action#checkstyle-github-action
+    "maven_checks[.]xml",                                                           # http://maven.apache.org/plugins/maven-checkstyle-plugin/
+    "linter[.]yml",                                                                 # https://github.com/github/super-linter in <root>/.github/workflows/
+    "checkstyle-suppressions[.]xml"                                                 # from manual analysis
 }
 
 signal_words = {

@@ -1,0 +1,5 @@
+checkstyle - signal
+findbugs - signal
+foopmdfoo - no signal
+.pmd - signals
+static analysis tool:codacy
