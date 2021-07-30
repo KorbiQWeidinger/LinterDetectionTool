@@ -1,5 +1,7 @@
 NAME = "Coverity"
 
+threshold = 1
+
 file_regex = {}
 
 signal_words = {

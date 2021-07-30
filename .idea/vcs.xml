@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tmp/LinterDetectionTool" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmp/pmd" vcs="Git" />
   </component>
 </project>

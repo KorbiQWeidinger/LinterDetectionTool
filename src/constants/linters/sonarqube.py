@@ -1,5 +1,7 @@
 NAME = "SonarQube"
 
+threshold = 3
+
 file_regex = {
     "sonar-generic-coverage[.]xsd",                                                         # https://docs.sonarqube.org/latest/analysis/generic-test/
     "sonar-project.properties"                                                              # manual analysis

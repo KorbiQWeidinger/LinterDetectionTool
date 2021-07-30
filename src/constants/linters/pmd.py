@@ -1,5 +1,7 @@
 NAME = "PMD"
 
+threshold = 2
+
 file_regex = {
     "pmd.*[.]xml"                                                                   # https://docs.gradle.org/current/userguide/pmd_plugin.html
 }

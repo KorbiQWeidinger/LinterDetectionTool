@@ -1,5 +1,7 @@
 NAME = "FindBugs"
 
+threshold = 4
+
 file_regex = {
     ".*findbugs.*",                                                                 # name
     "findbugs-exclude[.]xml",                                                       # from analysis

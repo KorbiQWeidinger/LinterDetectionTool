@@ -3,8 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <title>LinterDetectionTool</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: large;
+        }
+
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #ce6811;
+        }
+
+        .button1:hover {
+            background-color: #ce6811;
+            color: white;
+        }
+
+        .center {
+            display: inline-block;
+            margin: 0 auto;
+            padding: 3px;
+        }
+
+        #myProgress {
+            width: 100%;
+            background-color: #ddd;
+        }
+
+        #myBar {
+            width: 1%;
+            height: 30px;
+            background-color: rgba(206, 104, 17, 0.64);
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 60%;
+            height: 60%;
+        }
+
+        .ldt-table-item {
+            text-align: left;
+            padding: 8px;
+            background-color: #393939;
+            border: 2px solid #7b7b7b;
+            color: white;
+        }
+
+        .ldt-background-gray {
+            background-color: #363636;
+        }
+
+        .ldt-background-lightgray {
+            background-color: #7b7b7b;
+        }
+
+        .ldt-background-lightblue {
+            background-color: rgba(81, 172, 172, 0.84);
+        }
+
+        .ldt-background-lightpurple {
+            background-color: rgba(123, 81, 172, 0.84);
+        }
+
+        .ldt-background-red {
+            background-color: rgba(149, 14, 14, 0.66);
+        }
+
+        .ldt-background-green {
+            background-color: rgba(70, 149, 14, 0.66);
+        }
+
+        .ldt-tr-hover:hover {
+            background: rgba(151, 151, 151, 0.58);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .invisible-link {
+            color: white;
+            text-decoration: none;
+        }
+
+        td {
+            word-wrap: break-word;
+            max-width: 1px;
+        }
+    </style>
 </head>
-<body>
-    Welcome to the LDT!
+<body style="background-color: #7b7b7b; color: white">
+<div style="text-align: center; align-content: center; align-items: center">
+    <div>
+        <img src="../static/ldt-logo.png">
+    </div>
+    This is the official webpage of the LinterDetectionTool.<br>
+    The tool was developed in the context of the bachelor thesis:<br><br>
+
+    "Analysis of the impact of static analysis tools on the code quality of open-source software"<br><br>
+
+    <a href="/templates/docs.html">Documentation</a><br><br>
+
+    <div class="center" style="width: 40%; background-color: #171414; text-align: left; padding: 20px">
+        Search a GitHub project for Linters.<br><br>
+
+        Name of the owner: <input type="text" id="owner" name="owner"><br>
+        Name of the project: <input type="text" id="project" name="project"><br><br>
+
+        <button class="button button1" onclick="search()">Search</button>
+    </div>
+    <br>
+    <br>
+    <div class="center" id="results" style="width: 80%"></div>
+</div>
+<script>
+    const Http = new XMLHttpRequest();
+
+    document.getElementById("owner").value = localStorage.getItem("owner")
+    document.getElementById("project").value = localStorage.getItem("project")
+
+    function search() {
+        const getUrl = window.location;
+        const owner = document.getElementById("owner").value
+        const project = document.getElementById("project").value
+        const url = getUrl.protocol + "//" + getUrl.host + '/trigger-analysis/' + owner + '/' + project;
+
+        localStorage.setItem("owner", owner)
+        localStorage.setItem("project", project)
+
+        console.log(url)
+
+        Http.open("GET", url);
+        Http.send();
+
+        document.getElementById("results").innerHTML = "Analysing Project...<br><br><div id='myProgress'><div id='myBar' style='text-align: center'></div></div>"
+        move2()
+
+        Http.onreadystatechange = (e) => {
+            if (Http.status !== 200) {
+                document.getElementById("results").innerHTML = "<div style='color: red'>Status " + Http.status + "</div>"
+            }
+            else {
+                document.getElementById("results").innerHTML = Http.responseText
+            }
+        }
+    }
+
+    let i = 0;
+
+    function move() {
+        if (i === 0) {
+            i = 1;
+            const elem = document.getElementById("myBar");
+            let width = 1;
+            const id = setInterval(frame, 40);
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                    i = 0;
+                } else {
+                    width++;
+                    elem.style.width = width + "%";
+                }
+            }
+        }
+    }
+
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
+    async function move2() {
+        while (document.getElementById("myBar") !== null) {
+            move()
+            console.log("move")
+            await sleep(4000)
+        }
+    }
+</script>
 </body>
 </html>

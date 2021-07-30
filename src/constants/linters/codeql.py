@@ -1,5 +1,7 @@
 NAME = "CodeQL"
 
+threshold = 1
+
 file_regex = {
     # ".*lgtm.*",                                                              # removed during manual analysis (only caused false positives)
     ".*codeql.*",                                                              # names

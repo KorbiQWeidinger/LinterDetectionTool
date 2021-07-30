@@ -1,5 +1,7 @@
 NAME = "Blacklist"
 
+threshold = 0
+
 file_regex = {
     ".deepsource.toml"                                                                      # https://deepsource.io/features/
 }

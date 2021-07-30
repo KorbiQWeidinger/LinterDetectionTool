@@ -1,0 +1,52 @@
+<div>
+{% for linter in linters %}
+{% set file_findings = get_findings_for_linter(linter.NAME, findings, file_findings=True) %}
+{% set content_findings = get_findings_for_linter(linter.NAME, findings) %}
+{% set total = len(file_findings) + len(content_findings) %}
+{% if total != 0 %}
+    <table style="text-align: left; width: 100%; table-layout:fixed">
+        <tr>
+            <th class="ldt-table-item" colspan="2">Linter Name</th>
+            <th class="ldt-table-item">Findings Count</th>
+        </tr>
+        <tr>
+            {% if total >= linter.threshold %}
+            <td class="ldt-table-item ldt-background-green" colspan="2">{{linter.NAME}}</td>
+            <td class="ldt-table-item ldt-background-green">{{total}}</td>
+            {% else %}
+            <td class="ldt-table-item ldt-background-red" colspan="2">{{linter.NAME}}</td>
+            <td class="ldt-table-item ldt-background-red">{{total}}</td>
+            {% endif %}
+        </tr>
+        {% if len(file_findings) != 0 %}
+        <tr>
+            <th class="ldt-table-item ldt-background-gray">File Signal</th>
+            <th class="ldt-table-item ldt-background-gray" colspan="2">Location</th>
+        </tr>
+        {% endif %}
+        {% for finding in file_findings %}
+            <tr>
+                <td class="ldt-table-item ldt-background-lightblue">{{finding.signal}}</td>
+                <td class="ldt-table-item ldt-background-lightblue ldt-tr-hover" colspan="2"><a class="invisible-link" href="https://github.com/{{full_name}}/blob/master{{back_scape(finding.path)}}" target="_blank">https://github.com/{{full_name}}/blob/master{{back_scape(finding.path)}}</a></td>
+            </tr>
+        {% endfor %}
+        {% if len(content_findings) != 0 %}
+        <tr>
+            <th class="ldt-table-item ldt-background-gray">Content Signal</th>
+            <th class="ldt-table-item ldt-background-gray">Location</th>
+            <th class="ldt-table-item ldt-background-gray">Line</th>
+        </tr>
+        {% endif %}
+        {% for finding in content_findings %}
+            <tr>
+                <td class="ldt-table-item ldt-background-lightpurple">{{finding.signal}}</td>
+                <td class="ldt-table-item ldt-background-lightpurple ldt-tr-hover"><a class="invisible-link" href="https://github.com/{{full_name}}/blob/master{{back_scape(finding.path)}}" target="_blank">https://github.com/{{full_name}}/blob/master{{back_scape(finding.path)}}</a></td>
+                <td class="ldt-table-item ldt-background-lightpurple">{{finding.line}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br></br>
+    <br></br>
+{% endif %}
+{% endfor %}
+</div>

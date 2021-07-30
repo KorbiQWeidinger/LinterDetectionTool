@@ -1,5 +1,7 @@
 NAME = "SpotBugs"
 
+threshold = 5
+
 file_regex = {
     ".*spotbugs.*",                                                               # name
     "spotbugs-exclude[.]xml",                                                     # ??

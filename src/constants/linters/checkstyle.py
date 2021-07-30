@@ -1,5 +1,7 @@
 NAME = "Checkstyle"
 
+threshold = 3
+
 file_regex = {
     ".*checkstyle.*",                                                               # name
     "checkstyle[.]xml",                                                             # https://docs.gradle.org/current/userguide/checkstyle_plugin.html in <root>\config\checkstyle, https://stickler-ci.com/docs#java
