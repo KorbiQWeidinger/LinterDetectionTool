@@ -4,6 +4,7 @@ import sys
 import json
 from src.linter_analysis import find_signals, linters
 
+import flask
 from flask import Flask, render_template, url_for
 
 app = Flask(__name__)  # name for the Flask app (refer to output)
@@ -13,6 +14,8 @@ app.run(debug=False, host='0.0.0.0')  # to allow for debugging and auto-reload
 app = Flask(__name__)
 
 TMP = os.getcwd() + '\\tmp'
+
+print(flask.__version__)
 
 
 def clone_project(full_name):
