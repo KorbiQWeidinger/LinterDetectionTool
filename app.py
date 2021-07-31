@@ -15,9 +15,7 @@ port = int(os.getenv('PORT'))
 
 print(port, file=sys.stdout)
 
-app.run(debug=False, host='0.0.0.0', port=port)  # to allow for debugging and auto-reload
 
-app = Flask(__name__)
 
 TMP = os.getcwd() + '\\tmp'
 
@@ -64,3 +62,8 @@ def trigger_analysis(owner, name):
 
     return render_template('findings.html', findings=findings, full_name=full_name, linters=linters,
                            get_findings_for_linter=get_findings_for_linter, len=len, back_scape=back_scape)
+
+
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0', port=port)
+    app = Flask(__name__)
