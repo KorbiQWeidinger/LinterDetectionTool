@@ -12,6 +12,9 @@ app = Flask(__name__)  # name for the Flask app (refer to output)
 # running the server
 
 port = int(os.getenv('PORT'))
+
+print(port, file=sys.stdout)
+
 app.run(debug=False, host='0.0.0.0', port=port)  # to allow for debugging and auto-reload
 
 app = Flask(__name__)
