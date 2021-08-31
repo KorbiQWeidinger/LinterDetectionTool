@@ -1,4 +1,4 @@
-[LinterDetectionTool](static/ldt-logo.png)
+<td><img src="https://raw.githubusercontent.com/KorbinianQWeidinger/LinterDetectionTool/master/static/ldt-logo.png" width="100px" /></td>
 
 Welcome to the LinterDetectionTool repository! <br>
 My name is Korbinian Quirin Weidinger and I'm a student at the Technical University Munich.
