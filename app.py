@@ -1,47 +1,24 @@
 # app.py
 import os
 import sys
-import json
-from src.linter_analysis import find_signals, linters
 
+from git_analysis import clone_project
+from src.linter_analysis import find_signals, linters
 
 import flask
 from flask import Flask, render_template, url_for
 
+from util import clear_and_create, get_findings_for_linter
+
 app = Flask(__name__)  # name for the Flask app (refer to output)
 # running the server
 
-port = int(os.getenv('PORT'))
+# port = int(os.getenv('PORT'))
 
-print(port, file=sys.stdout)
-
-
+# print(port, file=sys.stdout)
+# print(flask.__version__)
 
 TMP = os.getcwd() + '\\tmp'
-
-print(flask.__version__)
-
-
-def clone_project(full_name):
-    print("############# Cloning Project ################", file=sys.stdout)
-    os.system(f"git clone https://github.com/{full_name}.git " + TMP + "/" + full_name.split("/")[1])
-    print("############# Cloning Complete ###############", file=sys.stdout)
-
-
-def clear_and_create_tmp():
-    os.system('rmdir "%s" /s /q' % TMP)
-    os.system('mkdir tmp')
-
-
-def get_findings_for_linter(linter_name, findings, file_findings=False):
-    result = []
-    for finding in findings:
-        if finding.linter_name == linter_name:
-            if finding.line == -1 and file_findings:
-                result.append(finding)
-            if finding.line != -1 and not file_findings:
-                result.append(finding)
-    return result
 
 
 def back_scape(st):
@@ -55,9 +32,9 @@ def home():
 
 @app.route("/trigger-analysis/<owner>/<name>")
 def trigger_analysis(owner, name):
-    clear_and_create_tmp()
+    clear_and_create(TMP)
     full_name = f"{owner}/{name}"
-    clone_project(full_name)
+    clone_project(full_name, TMP)
     findings = find_signals(f"{TMP}/{name}")
 
     return render_template('findings.html', findings=findings, full_name=full_name, linters=linters,
@@ -65,5 +42,4 @@ def trigger_analysis(owner, name):
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=port)
-    app = Flask(__name__)
+    app.run(debug=True, host='0.0.0.0')  # , port=port)
