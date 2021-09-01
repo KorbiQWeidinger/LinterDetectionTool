@@ -2,7 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LinterDetectionTool/LinterDetectionTool" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tmp/LinterDetectionTool" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tmp/LinterDetectionTool/LinterDetectionTool" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tmp/pmd" vcs="Git" />
   </component>
 </project>

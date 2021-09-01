@@ -42,17 +42,23 @@ Sadly it is not functional jet!
 
 ### CLI
 
-You can execute the LinterDetectionTool by running the following commands. <br>
+You can execute the LinterDetectionTool on Linux systems by running the following commands. <br>
 
-To clone and analyse a publicly available git repository run: <br>
+To clone and analyse a publicly available git repository from GitHub run: <br>
 ```
-python3 ldt-cli.py -g https://github.com/<owner>/<repo_name>.git
+python3 ldt-cli.py -g <owner> <repo_name>
 ```
+
+Example:
+`python3 ldt-cli.py -g KorbiQWeidinger LinterDetectionTool`
 
 To analyse a project on your machine: <br>
 ```
-python3 ldt-cli.py -f <full_path>
+python3 ldt-cli.py -f <full_path> <owner> <repo_name>
 ```
+Example:
+`python3 ldt-cli.py -f /home/user/LinterDetectionTool KorbiQWeidinger LinterDetectionTool`
+
 
 ## Integrated linters
 

@@ -18,7 +18,7 @@ app = Flask(__name__)  # name for the Flask app (refer to output)
 # print(port, file=sys.stdout)
 # print(flask.__version__)
 
-TMP = os.getcwd() + '\\tmp'
+TMP = os.getcwd() + '/tmp'
 
 
 def back_scape(st):

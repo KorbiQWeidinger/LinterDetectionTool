@@ -20,11 +20,9 @@ class LinterFinding(object):
     def write(self, full_name):
         url = "https://github.com/" + full_name + "/blob/master" + self.path.replace("\\", "/")
         line_string = ""
-        finding_type = "File/Folder Finding"
         if self.line >= 0:
-            line_string = " in line " + self.line.__str__()
-            finding_type = "Word in File Finding"
-        return finding_type + ": " + self.signal + line_string + " in " + url + "\n"
+            line_string = f" in line {self.line}"
+        return self.signal + line_string + " in " + url + line_string
 
     def toJson(self):
         return json.dumps(self, default=lambda o: o.__dict__)
@@ -51,7 +49,7 @@ def find_signals_in_files(files, root, search_path):
     for fn in files:
         if not is_file_of_interest(fn):
             continue
-        opened_file = open(root + "\\" + fn, "r", encoding='utf8')
+        opened_file = open(root + "/" + fn, "r", encoding='utf8')
         try:
             line_number = -1
             for line in opened_file.readlines():
@@ -60,7 +58,7 @@ def find_signals_in_files(files, root, search_path):
                     for signal_word in linter.signal_words:
                         if bool(re.search(signal_word, line)):
                             result.append(
-                                LinterFinding(path=root.replace(search_path, "") + "\\" + fn,
+                                LinterFinding(path=root.replace(search_path, "") + "/" + fn,
                                               signal=signal_word, line=line_number, linter_name=linter.NAME))
         except UnicodeDecodeError:
             continue
@@ -74,7 +72,7 @@ def find_signals_in_filenames(keywords, root, search_path):
         for linter in linters:
             for rx in linter.file_regex:
                 if bool(re.search(rx, key)):
-                    result.append(LinterFinding(path=root.replace(search_path, "") + "\\" + key,
+                    result.append(LinterFinding(path=root.replace(search_path, "") + "/" + key,
                                                 signal=rx, linter_name=linter.NAME))
     return result
 
@@ -85,7 +83,7 @@ def save_findings_to_files(full_name, project_path, result_path):
     url = "https://github.com/" + full_name
 
     if len(signal_findings) == 0:
-        no_findings_file = open(result_path + "\\no_findings.txt", "a")
+        no_findings_file = open(result_path + "/no_findings.txt", "a")
         no_findings_file.write(url + "\n")
         no_findings_file.close()
         return
@@ -97,7 +95,7 @@ def save_findings_to_files(full_name, project_path, result_path):
                 findings.append(signal_finding)
         if len(findings) > 0:
             new_file = open(
-                result_path + "\\" + full_name.replace("/", "_") + "+" + linter.NAME + "+" + len(
+                result_path + "/" + full_name.replace("/", "_") + "+" + linter.NAME + "+" + len(
                     findings).__str__() + ".txt", "w+")
             for finding in findings:
                 new_file.write(finding.write(full_name))

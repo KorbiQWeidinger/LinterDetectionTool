@@ -2,8 +2,8 @@ import os
 
 
 def clear_and_create(folder):
-    os.system('rmdir "%s" /s /q' % folder)
-    os.system('mkdir tmp')
+    os.system(f'rm -rf {folder}')
+    os.system(f'mkdir {folder}')
 
 
 def get_findings_for_linter(linter_name, findings, file_findings=False):
